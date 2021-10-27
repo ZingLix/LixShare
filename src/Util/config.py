@@ -1,0 +1,6 @@
+import yaml
+
+with open("config/config.yml") as f:
+    config = yaml.safe_load(f)
+
+
