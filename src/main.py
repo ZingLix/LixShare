@@ -85,7 +85,7 @@ async def create_document(req: CreateDocumentRequest):
             )
     content = req.content
     if req.doc_type == DocumentType.Markdown:
-        content = markdown.markdown(content, extensions=["fenced_code"])
+        content = markdown.markdown(content, extensions=["extra"])
     if req.expire == -1:
         expire_at = 0
     else:
@@ -106,7 +106,6 @@ async def get_document(request: Request, doc_id: str):
     item = doc_db.find_one({"doc_id": doc_id})
     if item != None and item["expire_at"] != 0 and item["expire_at"] < time.time():
         item = None
-        doc_db.delete_many({"doc_id": doc_id})
     if item is None:
         return templates.TemplateResponse(
             "doc.html",
