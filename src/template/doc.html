@@ -20,9 +20,6 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel+Decorative:wght@700&display=swap">
     </noscript>
 
-    <link rel=manifest href=/manifest.json>
-    <link rel=canonical href=https://io-oi.me/tech/documentation-of-hugo-theme-meme />
-
     <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@700&text=reuixiy&display=swap"
         media=print onload="this.media='all'"><noscript>
         <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@700&text=reuixiy&display=swap">
@@ -43,9 +40,7 @@
                         </ul>
                     </nav>
                 </div>
-            </div><input type=checkbox id=nav-toggle aria-hidden=true>
-            <label for=nav-toggle class=nav-toggle></label>
-            <label for=nav-toggle class=nav-curtain></label>
+            </div>
         </header>
         <main class="main single" id=main>
             <div class=main-inner>
@@ -77,8 +72,8 @@
             </div>
         </footer>
     </div>
-    <script>'serviceWorker' in navigator && window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js') })</script>
-    <script src=/js/medium-zoom.min.js></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
     <script>mediumZoom(document.querySelectorAll('div.post-body img'), { background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)' })</script>
 </body>
 

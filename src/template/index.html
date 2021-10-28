@@ -21,9 +21,6 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel+Decorative:wght@700&display=swap">
     </noscript>
 
-    <link rel=manifest href=/manifest.json>
-    <link rel=canonical href=https://io-oi.me/tech/documentation-of-hugo-theme-meme />
-
     <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@700&text=reuixiy&display=swap"
         media=print onload="this.media='all'"><noscript>
         <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@700&text=reuixiy&display=swap">
@@ -44,31 +41,30 @@
                         </ul>
                     </nav>
                 </div>
-            </div><input type=checkbox id=nav-toggle aria-hidden=true>
-            <label for=nav-toggle class=nav-toggle></label>
-            <label for=nav-toggle class=nav-curtain></label>
+            </div>
         </header>
         <main class="main single" id=main>
             <div class=main-inner>
-                <form name="myForm" id='myForm'>
-                    <label for="doc_type">Type:</label><br>
-                    <select name="doc_type">
+                <form name="myForm" id='myForm' style="font-size: 18px;">
+                    <label for=" doc_type">Type:</label><br>
+                    <select name="doc_type" style="font-size: 18px;">
                         <option value="markdown">Markdown</option>
                         <option value="html">HTML</option>
                     </select>
                     <br>
 
                     <label for="doc_type">Title:</label><br>
-                    <input name="title">
+                    <input name="title" style="width: 100%; font-size: 18px;">
                     </input>
                     <br>
 
                     <label for="content"> Content: </label><br>
-                    <textarea type="text" name="content" style="height: 300px; width: 100%;"></textarea>
+                    <textarea type="text" name="content"
+                        style="height: 300px; width: 100%; font-size: 18px;"></textarea>
                     <br>
 
                     <label for="expire"> Expire after:</label><br>
-                    <select name="expire">
+                    <select name="expire" style="font-size: 18px;">
                         <option value="600">10 Minutes</option>
                         <option value="3600">1 Hour</option>
                         <option value="43200">12 Hours</option>
@@ -76,7 +72,7 @@
                         <option value="259200">30 Days</option>
                         <option value="0">Never</option>
                     </select><br>
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Share" style="margin-top: 8px; font-size: 18px;">
                 </form>
 
 
@@ -96,13 +92,10 @@
             </div>
         </footer>
     </div>
-    <script>'serviceWorker' in navigator && window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js') })</script>
-    <script src=/js/medium-zoom.min.js></script>
     <script>mediumZoom(document.querySelectorAll('div.post-body img'), { background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)' })</script>
     <script>
         $('#myForm').on('submit', (function (E) {
-
-            console.log($('#myForm').serializeArray())
+            E.preventDefault();
             var obj = $('#myForm').serializeArray();
             var req = {};
             for (var item of obj) {
@@ -115,7 +108,6 @@
                 alert("内容不能为空！")
                 return;
             }
-            console.log(req)
             $.ajax({
                 type: 'POST',
                 url: '/',
@@ -127,7 +119,7 @@
                     window.location.href = data['url'];
                 }
             });
-            E.preventDefault();
+
         }))
     </script>
 </body>
