@@ -6,7 +6,7 @@ from enum import Enum
 import time
 import uuid
 import markdown
-import datetime
+import threading
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -58,6 +58,20 @@ app.mount("/fonts", StaticFiles(directory="static/fonts"), name="fonts")
 templates = Jinja2Templates(directory="template")
 
 
+def clean_outdated_data():
+    current = int(time.time())
+    doc_db.delete_many({"expire_at": {"$lt": current, "$ne": 0}})
+
+
+def clean_background():
+    while True:
+        clean_outdated_data()
+        time.sleep(600)
+
+
+threading.Thread(target=clean_background).start()
+
+
 @app.post("/")
 async def create_document(req: CreateDocumentRequest):
     id = generate_id()
@@ -71,7 +85,7 @@ async def create_document(req: CreateDocumentRequest):
             )
     content = req.content
     if req.doc_type == DocumentType.Markdown:
-        content = markdown.markdown(content)
+        content = markdown.markdown(content, extensions=["fenced_code"])
     if req.expire == -1:
         expire_at = 0
     else:
